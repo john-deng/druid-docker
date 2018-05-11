@@ -3,10 +3,12 @@ version: '2'
 services:
   zookeeper:
     image: mesoscloud/zookeeper:3.4.8-ubuntu-14.04
+    privileged: true
     volumes:
       - './data/zookeeper:/tmp/zookeeper:rw'
   mysql:
     image: mysql:5.7
+    privileged: true
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
       MYSQL_DATABASE: druid
@@ -20,6 +22,7 @@ services:
   historical:
     build: ./druid
     image: druid
+    privileged: true
     command:
       - historical
       - -Ddruid.zk.service.host=zookeeper
@@ -42,6 +45,7 @@ services:
   broker:
     build: ./druid
     image: druid
+    privileged: true
     command:
       - broker
       - -Ddruid.zk.service.host=zookeeper
@@ -64,6 +68,7 @@ services:
   coordinator:
     build: ./druid
     image: druid
+    privileged: true
     command:
       - coordinator
       - -Ddruid.zk.service.host=zookeeper
@@ -86,6 +91,7 @@ services:
   overlord:
     build: ./druid
     image: druid
+    privileged: true
     command:
       - overlord
       - -Ddruid.zk.service.host=zookeeper
@@ -109,6 +115,7 @@ services:
   middle_manager:
     build: ./druid
     image: druid
+    privileged: true
     command:
       - middleManager
       - -Ddruid.zk.service.host=zookeeper
@@ -129,6 +136,7 @@ services:
   tranquility:
     build: ./tranquility
     image: tranquility
+    privileged: true
     command:
       - kafka
       - -J-Xms0m
