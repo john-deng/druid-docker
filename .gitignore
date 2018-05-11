@@ -1,4 +1,4 @@
 /tmp
 /data
-/conf/tranquility/*.json
+# /conf/tranquility/*.json
 /extensions/tranquility/*
