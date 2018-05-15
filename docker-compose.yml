@@ -4,6 +4,7 @@ services:
   zookeeper:
     image: mesoscloud/zookeeper:3.4.8-ubuntu-14.04
     privileged: true
+    restart: always
     ports:
     - "2181:2181"
     volumes:
@@ -11,6 +12,7 @@ services:
   mysql:
     image: mysql:5.7
     privileged: true
+    restart: always
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
       MYSQL_DATABASE: druid
@@ -24,6 +26,7 @@ services:
   historical:
     image: vpclub/druid
     privileged: true
+    restart: always
     command:
       - historical
       - -Ddruid.zk.service.host=zookeeper
@@ -46,6 +49,7 @@ services:
   broker:
     image: vpclub/druid
     privileged: true
+    restart: always
     command:
       - broker
       - -Ddruid.zk.service.host=zookeeper
@@ -68,6 +72,7 @@ services:
   coordinator:
     image: vpclub/druid
     privileged: true
+    restart: always
     command:
       - coordinator
       - -Ddruid.zk.service.host=zookeeper
@@ -90,6 +95,7 @@ services:
   overlord:
     image: vpclub/druid
     privileged: true
+    restart: always
     command:
       - overlord
       - -Ddruid.zk.service.host=zookeeper
@@ -113,6 +119,7 @@ services:
   middle_manager:
     image: vpclub/druid
     privileged: true
+    restart: always
     command:
       - middleManager
       - -Ddruid.zk.service.host=zookeeper
@@ -133,6 +140,7 @@ services:
   tranquility:
     image: vpclub/tranquility
     privileged: true
+    restart: always
     command:
       - kafka
       - -J-Xms0m
