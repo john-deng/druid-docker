@@ -4,6 +4,8 @@ services:
   zookeeper:
     image: mesoscloud/zookeeper:3.4.8-ubuntu-14.04
     privileged: true
+    ports:
+    - "2181:2181"
     volumes:
       - './data/zookeeper:/tmp/zookeeper:rw'
   mysql:
@@ -20,8 +22,7 @@ services:
     volumes:
       - './data/mysql:/var/lib/mysql:rw'
   historical:
-    build: ./druid
-    image: druid
+    image: vpclub/druid
     privileged: true
     command:
       - historical
@@ -43,8 +44,7 @@ services:
       - zookeeper
       - mysql
   broker:
-    build: ./druid
-    image: druid
+    image: vpclub/druid
     privileged: true
     command:
       - broker
@@ -66,8 +66,7 @@ services:
       - zookeeper
       - mysql
   coordinator:
-    build: ./druid
-    image: druid
+    image: vpclub/druid
     privileged: true
     command:
       - coordinator
@@ -89,8 +88,7 @@ services:
       - zookeeper
       - mysql
   overlord:
-    build: ./druid
-    image: druid
+    image: vpclub/druid
     privileged: true
     command:
       - overlord
@@ -113,8 +111,7 @@ services:
       - zookeeper
       - mysql
   middle_manager:
-    build: ./druid
-    image: druid
+    image: vpclub/druid
     privileged: true
     command:
       - middleManager
@@ -134,8 +131,7 @@ services:
       - zookeeper
       - mysql
   tranquility:
-    build: ./tranquility
-    image: tranquility
+    image: vpclub/tranquility
     privileged: true
     command:
       - kafka
